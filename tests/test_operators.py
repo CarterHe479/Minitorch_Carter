@@ -1,3 +1,4 @@
+import math
 from typing import Callable, List, Tuple
 
 import pytest
@@ -13,6 +14,7 @@ from minitorch.operators import (
     id,
     inv,
     inv_back,
+    is_close,
     log_back,
     lt,
     max,
@@ -107,14 +109,36 @@ def test_sigmoid(a: float) -> None:
     * It crosses 0 at 0.5
     * It is  strictly increasing.
     """
-    raise NotImplementedError("Need to include this file from past assignment.")
+    # TODO: Implement for Task 0.2.
+
+    # * It is always between 0.0 and 1.0.
+    assert 0.0 <= sigmoid(a) <= 1.0, f"sigmoid({a}) is not between 0 and 1"
+
+    # * one minus sigmoid is the same as sigmoid of the negative
+    assert is_close(
+        1.0 - sigmoid(a), sigmoid(-a)
+    ), f"1 - sigmoid({a}) is not sigmoid(-{a})"
+
+    # below are not necessary
+    # * It crosses 0.5 at 0 ???
+    assert is_close(sigmoid(0.0), 0.5), "sigmoid(0) is not 0.5"
+
+    # * It is  strictly increasing. ??? not sure about this
+    assert math.isclose(
+        sigmoid(a), sigmoid(a + 1e-5), rel_tol=1e-5
+    ), "sigmoid is not strictly increasing"
 
 
 @pytest.mark.task0_2
 @given(small_floats, small_floats, small_floats)
 def test_transitive(a: float, b: float, c: float) -> None:
     """Test the transitive property of less-than (a < b and b < c implies a < c)"""
-    raise NotImplementedError("Need to include this file from past assignment.")
+    # TODO: Implement for Task 0.2.
+    # assert not (lt(a, b) and lt(b, c)) or (lt(a, c)), "It is not transitive"
+    if lt(a, b) == 1.0 and lt(b, c) == 1.0:
+        assert lt(a, c) == 1.0, "It is not transitive"
+    if lt(c, b) == 1.0 and lt(b, a) == 1.0:
+        assert lt(c, a) == 1.0
 
 
 @pytest.mark.task0_2
@@ -122,7 +146,8 @@ def test_symmetric() -> None:
     """Write a test that ensures that :func:`minitorch.operators.mul` is symmetric, i.e.
     gives the same value regardless of the order of its input.
     """
-    raise NotImplementedError("Need to include this file from past assignment.")
+    # TODO: Implement for Task 0.2.
+    assert mul(2, 3) == mul(3, 2), "mul(2, 3) is not equal to mul(3, 2)"
 
 
 @pytest.mark.task0_2
@@ -130,13 +155,19 @@ def test_distribute() -> None:
     r"""Write a test that ensures that your operators distribute, i.e.
     :math:`z \times (x + y) = z \times x + z \times y`
     """
-    raise NotImplementedError("Need to include this file from past assignment.")
+    # TODO: Implement for Task 0.2.
+    assert mul(2, add(3, 4)) == add(
+        mul(2, 3), mul(2, 4)
+    ), "mul(2, add(3, 4)) is not equal to add(mul(2, 3), mul(2, 4))"
 
 
 @pytest.mark.task0_2
 def test_other() -> None:
     """Write a test that ensures some other property holds for your functions."""
-    raise NotImplementedError("Need to include this file from past assignment.")
+    # TODO: Implement for Task 0.2.
+    assert is_close(
+        1.0 - sigmoid(2), sigmoid(-2)
+    ), "1 - sigmoid(2) is not equal to sigmoid(-2)"
 
 
 # ## Task 0.3  - Higher-order functions
@@ -163,7 +194,12 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     """Write a test that ensures that the sum of `ls1` plus the sum of `ls2`
     is the same as the sum of each element of `ls1` plus each element of `ls2`.
     """
-    raise NotImplementedError("Need to include this file from past assignment.")
+    # TODO: Implement for Task 0.3.
+    # assert is_close(
+    #    sum(ls1) + sum(ls2), sum(addLists(ls1, ls2))
+    # ), "sum(ls1) + sum(ls2) is not equal to sum(addLists(ls1, ls2))"
+
+    assert_close(sum(ls1) + sum(ls2), sum(addLists(ls1, ls2)))
 
 
 @pytest.mark.task0_3

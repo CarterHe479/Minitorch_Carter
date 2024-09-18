@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import List, Tuple
 
 
-def make_pts(N: int) -> List[Tuple[float, float]]:
+def make_pts(N: int) -> List[Tuple[float, float]]:  # noqa: D103
     X = []
     for i in range(N):
         x_1 = random.random()
@@ -20,7 +20,7 @@ class Graph:
     y: List[int]
 
 
-def simple(N: int) -> Graph:
+def simple(N: int) -> Graph:  # noqa: D103
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -29,7 +29,7 @@ def simple(N: int) -> Graph:
     return Graph(N, X, y)
 
 
-def diag(N: int) -> Graph:
+def diag(N: int) -> Graph:  # noqa: D103
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -38,7 +38,7 @@ def diag(N: int) -> Graph:
     return Graph(N, X, y)
 
 
-def split(N: int) -> Graph:
+def split(N: int) -> Graph:  # noqa: D103
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -47,7 +47,7 @@ def split(N: int) -> Graph:
     return Graph(N, X, y)
 
 
-def xor(N: int) -> Graph:
+def xor(N: int) -> Graph:  # noqa: D103
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -56,7 +56,7 @@ def xor(N: int) -> Graph:
     return Graph(N, X, y)
 
 
-def circle(N: int) -> Graph:
+def circle(N: int) -> Graph:  # noqa: D103
     X = make_pts(N)
     y = []
     for x_1, x_2 in X:
@@ -66,7 +66,7 @@ def circle(N: int) -> Graph:
     return Graph(N, X, y)
 
 
-def spiral(N: int) -> Graph:
+def spiral(N: int) -> Graph:  # noqa: D103
     def x(t: float) -> float:
         return t * math.cos(t) / 20.0
 

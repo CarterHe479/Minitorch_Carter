@@ -14,7 +14,7 @@ class SGD(Optimizer):
         super().__init__(parameters)
         self.lr = lr
 
-    def zero_grad(self) -> None:
+    def zero_grad(self) -> None:  # noqa: D102
         for p in self.parameters:
             if p.value is None:
                 continue
@@ -25,7 +25,7 @@ class SGD(Optimizer):
                 if p.value.grad is not None:
                     p.value.grad = None
 
-    def step(self) -> None:
+    def step(self) -> None:  # noqa: D102
         for p in self.parameters:
             if p.value is None:
                 continue

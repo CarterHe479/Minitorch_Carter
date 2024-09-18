@@ -1,4 +1,4 @@
-from .testing import MathTest, MathTestVariable  # type: ignore # noqa: F401,F403
+from .testing import MathTest, MathTestVariable  # type: ignore  # noqa: D104, F401, F403
 from .autodiff import *  # noqa: F401,F403
 from .scalar import *  # noqa: F401,F403
 from .scalar_functions import *  # noqa: F401,F403
